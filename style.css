@@ -1,3 +1,4 @@
+/* ===== 1. Design system: colours, type scale, spacing ===== */
 :root {
   /* colours: light theme */
   --color-bg: #ffffff;
@@ -9,14 +10,14 @@
   --color-on-accent: #ffffff;
   --color-error: #b91c1c;
   --color-success: #15803d;
-
+ 
   /* type scale: 5 sizes only */
   --text-sm: 0.875rem;  /* 14px */
   --text-base: 1rem;    /* 16px */
   --text-lg: 1.25rem;   /* 20px */
   --text-xl: 1.75rem;   /* 28px */
   --text-2xl: 2.5rem;   /* 40px */
-
+ 
   /* spacing: steps of 8px */
   --space-1: 0.5rem;  /* 8px */
   --space-2: 1rem;    /* 16px */
@@ -24,11 +25,11 @@
   --space-4: 2rem;    /* 32px */
   --space-6: 3rem;    /* 48px */
   --space-8: 4rem;    /* 64px */
-
+ 
   --radius: 8px;
   --max-width: 1100px;
 }
-
+ 
 html[data-theme="dark"] {
   --color-bg: #0b1220;
   --color-surface: #1f2937;
@@ -40,18 +41,18 @@ html[data-theme="dark"] {
   --color-error: #f87171;
   --color-success: #4ade80;
 }
-
-
+ 
+/* ===== 2. Base ===== */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
+ 
 html {
   scroll-behavior: smooth;
 }
-
+ 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -60,45 +61,45 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
 }
-
+ 
 h1,
 h2,
 h3 {
   line-height: 1.2;
   margin: 0 0 var(--space-2);
 }
-
+ 
 h1 { font-size: var(--text-2xl); }
 h2 { font-size: var(--text-xl); }
 h3 { font-size: var(--text-lg); }
-
+ 
 p {
   margin: 0 0 var(--space-2);
 }
-
+ 
 a {
   color: var(--color-accent);
 }
-
-.about-photo {
-  width: 160px;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;   /* делает блок квадратным */
-  object-fit: cover;     /* обрезает фото по квадрату, не сплющивая его */
+ 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
-
+ 
+/* visible keyboard focus for every interactive element */
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 3px;
 }
-
+ 
 .container {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--space-2);
 }
-
+ 
 .skip-link {
   position: absolute;
   left: var(--space-2);
@@ -109,12 +110,12 @@ a {
   border-radius: var(--radius);
   z-index: 10;
 }
-
+ 
 .skip-link:focus {
   top: var(--space-2);
 }
-
-
+ 
+/* ===== 3. Header and navigation (phone first) ===== */
 .site-header {
   position: sticky;
   top: 0;
@@ -122,7 +123,7 @@ a {
   border-bottom: 1px solid var(--color-border);
   z-index: 5;
 }
-
+ 
 .header-inner {
   display: flex;
   flex-direction: column;
@@ -131,14 +132,14 @@ a {
   padding-top: var(--space-2);
   padding-bottom: var(--space-2);
 }
-
+ 
 .logo {
   font-size: var(--text-lg);
   font-weight: 700;
   color: var(--color-text);
   text-decoration: none;
 }
-
+ 
 .nav-list {
   display: flex;
   gap: var(--space-3);
@@ -146,17 +147,17 @@ a {
   margin: 0;
   padding: 0;
 }
-
+ 
 .nav-list a {
   color: var(--color-text);
   text-decoration: none;
   font-weight: 600;
 }
-
+ 
 .nav-list a:hover {
   color: var(--color-accent);
 }
-
+ 
 .theme-toggle,
 .button {
   font: inherit;
@@ -166,24 +167,24 @@ a {
   border-radius: var(--radius);
   cursor: pointer;
 }
-
+ 
 .theme-toggle {
   background: transparent;
   color: var(--color-text);
   border: 1px solid var(--color-border);
 }
-
-
+ 
+/* ===== 4. Sections ===== */
 .section {
   padding: var(--space-6) 0;
-  scroll-margin-top: 160px; 
+  scroll-margin-top: 160px; /* so the sticky header does not cover headings */
 }
-
+ 
 .section-alt {
   background: var(--color-surface);
 }
-
-
+ 
+/* About: photo above text on phone */
 .about {
   display: flex;
   flex-direction: column;
@@ -191,17 +192,19 @@ a {
   text-align: center;
   gap: var(--space-4);
 }
-
+ 
 .about-photo {
   width: 160px;
   border-radius: 50%;
+  aspect-ratio: 1 / 1;   /* makes the photo square */
+  object-fit: cover;     /* crops the photo instead of squashing it */
 }
-
+ 
 .lead {
   font-size: var(--text-lg);
   color: var(--color-muted);
 }
-
+ 
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -211,21 +214,21 @@ a {
   margin: 0;
   padding: 0;
 }
-
+ 
 .skills li {
   font-size: var(--text-sm);
   padding: 0 var(--space-2);
   border: 1px solid var(--color-border);
   border-radius: 999px;
 }
-
-
+ 
+/* Projects: one column on phone */
 .project-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
 }
-
+ 
 .card {
   display: flex;
   flex-direction: column;
@@ -234,38 +237,38 @@ a {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
 }
-
+ 
 .card p {
   color: var(--color-muted);
   flex-grow: 1;
 }
-
+ 
 .card-link {
   font-weight: 600;
 }
-
-
+ 
+/* ===== 5. Contact form ===== */
 .contact {
   max-width: 640px;
 }
-
+ 
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   margin-top: var(--space-3);
 }
-
+ 
 .field {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
 }
-
+ 
 label {
   font-weight: 600;
 }
-
+ 
 input,
 textarea {
   font: inherit;
@@ -275,19 +278,19 @@ textarea {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
 }
-
+ 
 input[aria-invalid="true"],
 textarea[aria-invalid="true"] {
   border-color: var(--color-error);
 }
-
+ 
 .error {
   font-size: var(--text-sm);
   color: var(--color-error);
   margin: 0;
   min-height: 1.4em;
 }
-
+ 
 .button {
   align-self: flex-start;
   font-size: var(--text-base);
@@ -296,14 +299,14 @@ textarea[aria-invalid="true"] {
   color: var(--color-on-accent);
   border: none;
 }
-
+ 
 .success {
   color: var(--color-success);
   font-weight: 600;
   margin: 0;
 }
-
-
+ 
+/* ===== 6. Footer ===== */
 .site-footer {
   padding: var(--space-3) 0;
   border-top: 1px solid var(--color-border);
@@ -311,10 +314,11 @@ textarea[aria-invalid="true"] {
   font-size: var(--text-sm);
   color: var(--color-muted);
 }
-
+ 
 .site-footer p {
   margin: 0;
 }
+ 
 /* ===== 7. Desktop: from 768px wide ===== */
 @media (min-width: 768px) {
   /* header becomes one row */
@@ -322,31 +326,31 @@ textarea[aria-invalid="true"] {
     flex-direction: row;
     justify-content: space-between;
   }
-
+ 
   .nav-list {
     gap: var(--space-4);
   }
-
+ 
   .section {
     padding: var(--space-8) 0;
     scroll-margin-top: 72px;
   }
-
+ 
   /* About: photo on the left, text on the right */
   .about {
     flex-direction: row;
     text-align: left;
   }
-
+ 
   .about-photo {
     width: 200px;
     flex-shrink: 0;
   }
-
+ 
   .skills {
     justify-content: flex-start;
   }
-
+ 
   /* Projects: three columns */
   .project-grid {
     grid-template-columns: repeat(3, 1fr);
