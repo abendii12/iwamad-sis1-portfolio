@@ -80,12 +80,12 @@ a {
   color: var(--color-accent);
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+.about-photo {
+  width: 160px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;   /* делает блок квадратным */
+  object-fit: cover;     /* обрезает фото по квадрату, не сплющивая его */
 }
-
 
 :focus-visible {
   outline: 3px solid var(--color-accent);
@@ -314,4 +314,41 @@ textarea[aria-invalid="true"] {
 
 .site-footer p {
   margin: 0;
+}
+/* ===== 7. Desktop: from 768px wide ===== */
+@media (min-width: 768px) {
+  /* header becomes one row */
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .nav-list {
+    gap: var(--space-4);
+  }
+
+  .section {
+    padding: var(--space-8) 0;
+    scroll-margin-top: 72px;
+  }
+
+  /* About: photo on the left, text on the right */
+  .about {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .about-photo {
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .skills {
+    justify-content: flex-start;
+  }
+
+  /* Projects: three columns */
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
